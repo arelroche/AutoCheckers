@@ -1,0 +1,10 @@
+NOTES
+
+SanityCheck.h  
+- line 331: comment out no thermistor error
+	- line 394/5 for pat
+
+Configuration.h
+- line 320: comment out define enstop pullup
+- line 185(pat): TEMP_SENSOR_0 to 0
+- enable corexy

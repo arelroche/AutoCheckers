@@ -1,0 +1,24 @@
+//Works if HAS_FAN==1 (seems to automatically detect)
+
+M106 - fan on
+M107 - fan off
+
+//Works if HAS_TEMP_BED==1 
+
+M190 - waits until temp bed reaches target
+
+G0/G1 - move towards XYZ 
+format: G0 X100 Y100 Z100
+
+M119 - endstop status
+
+M17 - enable/power all stepper motors
+
+G92 - set current position to coordinates given
+G90 - use absolute coordinates
+G91 - use relative coordinates
+
+G30 - probes bed at current X/Y location
+
+M120 - enable endstop detection
+M121 - disable endstop detection
