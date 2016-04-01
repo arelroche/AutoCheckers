@@ -64,7 +64,7 @@ def take_picture(mirror=False):
 						    #print(grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y)
 						    #print(circles[i])
 						    c = output[circles[i,0],circles[i,1]]
-						    print(c)
+						    #print(c)
 				  
 		font = cv2.FONT_HERSHEY_SIMPLEX	
 		cv2.putText(img, text, (100,100), font, 2, 255)
@@ -107,10 +107,10 @@ def take_picture(mirror=False):
 		
 		if cv2.waitKey(1) == 27: 
 			break  # esc to quit
-		return board
 		
-		#cv2.destroyAllWindows()
-		#return board
+		
+		cv2.destroyAllWindows()
+		return board
   cv2.destroyAllWindows()
   
 def drawgrid(grid,image):
@@ -155,7 +155,7 @@ def myRectangle(image,pt1,pt2,color):
 
 
 def main():
-	board = take_picture(mirror=True)
+	board = take_picture(mirror=False)
 	return board
 
 if __name__ == '__main__':

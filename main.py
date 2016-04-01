@@ -6,13 +6,15 @@ import numpy as np
 def main():
 	#ser = comm.ser_init()	
 	while True:
-		state = raw_input('"manual" or "automatic"? :')
+		state = raw_input('"manual" or "auto"? :')
 		
 		if (state == "manual"):
 			comm.ser_arduino(ser)
 
-		if (state == "automatic"):
+		elif (state == "auto"):
 			computer_play()
+		else:
+			print "Hmm, try again."
 
 def computer_play():
 	board =  cam.take_picture(mirror=False)
