@@ -171,6 +171,62 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "testCheckers.py",
+			"settings":
+			{
+				"buffer_size": 828,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CPlayer.py",
+			"settings":
+			{
+				"buffer_size": 3180,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CManual.py",
+			"settings":
+			{
+				"buffer_size": 1456,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CheckersBrain.py",
+			"settings":
+			{
+				"buffer_size": 9490,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CPiece.py",
+			"settings":
+			{
+				"buffer_size": 8273,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CBoard.py",
+			"settings":
+			{
+				"buffer_size": 12859,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "board.txt",
+			"settings":
+			{
+				"buffer_size": 110,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -221,6 +277,7 @@
 	"file_history":
 	[
 		"/C/Users/Ashis/Documents/CheckerAutobot/AutoCheckers/board.txt",
+		"/C/Users/Ashis/Documents/CheckerAutobot/AutoCheckers/CheckersBrain.py",
 		"/C/Users/Ashis/Documents/CheckerAutobot/checkerbot.sublime-workspace",
 		"/C/Users/Ashis/Documents/PLEO_2016/PLEO/PLEO.sublime-project",
 		"/C/Users/Ashis/Documents/CheckerAutobot/checker_cam.py",
@@ -290,6 +347,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"print",
+			"run_self",
+			"board",
+			"human.handoff",
+			"handoff",
+			"board_from_vision",
+			"board_from_",
+			"CBoard",
+			"reset",
+			"best_move",
+			"robot_exe",
+			"print",
+			"alphabeta",
+			"self.move",
+			"handoff",
+			"human.hand",
+			"human.handoff",
 			"board_next",
 			"grid",
 			"choice",
@@ -409,8 +483,203 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "testCheckers.py",
+					"settings":
+					{
+						"buffer_size": 828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								583,
+								583
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 5,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "CPlayer.py",
+					"settings":
+					{
+						"buffer_size": 3180,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								704,
+								704
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 699.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "CManual.py",
+					"settings":
+					{
+						"buffer_size": 1456,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "CheckersBrain.py",
+					"settings":
+					{
+						"buffer_size": 9490,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4264,
+								4269
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2744.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "CPiece.py",
+					"settings":
+					{
+						"buffer_size": 8273,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6073,
+								6073
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 877.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "CBoard.py",
+					"settings":
+					{
+						"buffer_size": 12859,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2806,
+								2806
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1716.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "board.txt",
+					"settings":
+					{
+						"buffer_size": 110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								43,
+								43
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

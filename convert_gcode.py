@@ -45,15 +45,15 @@ def convert_gcode(ser, moveArray):
         if moveArray[i][0] == 'pick':
             #fan on
             comm.ser_command(ser, 'M106')
-            comm.ser_command(ser, 'G1 Z-10')
+            #comm.ser_command(ser, 'G1 Z8')
             sleep(2)
-            comm.ser_command(ser, 'G1 Z10')
+            #comm.ser_command(ser, 'G1 Z0')
         else:
             #fan off
             comm.ser_command(ser, 'M107')
-            comm.ser_command(ser, 'G1 Z-10')
-            sleep(2)
-            comm.ser_command(ser, 'G1 Z10')
+            # comm.ser_command(ser, 'G1 Z-10')
+            # sleep(2)
+            # comm.ser_command(ser, 'G1 Z10')
         
         #z-up
         #ser.write('G1 Z \n')#####

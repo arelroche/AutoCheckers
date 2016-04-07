@@ -9,8 +9,8 @@ from convert_gcode import convert_gcode as move
 import testCheckers as ai
 
 def main():
-	#ser = comm.ser_init()
-	ser = None
+	ser = comm.ser_init()
+	#ser = None
 
 	while True:
 		state = raw_input('"manual" or "auto"? :')
@@ -37,7 +37,7 @@ def computer_play(ser):
 
 		moves = game.moveparse(moves)
 
-		#move(ser,moves)
+		move(ser,moves)
 		#board_next = np.genfromtxt('test_next.txt', dtype=str)
 
 		#moves = game.boardparse(board, board_next)

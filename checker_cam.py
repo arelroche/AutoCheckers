@@ -4,15 +4,19 @@ from enum import Enum
 from time import sleep
 
   
-squaresize = 41
+squaresize = 37
+angle=90
+x_offset=-10
+y_offset=0
+
 
 class square:
   
   def __init__(self,letter,number):
     self.size = squaresize
     self.piece = '.'
-    self.x = (ord(letter)-64)*(squaresize+2) 
-    self.y = (number+1)*(squaresize+2)      
+    self.x = (ord(letter)-64)*(squaresize+2) + x_offset
+    self.y = (number+1)*(squaresize+2) + y_offset
         
 
 
@@ -21,9 +25,9 @@ def take_picture(mirror=False):
   cam = cv2.VideoCapture(0)
   while True:
 		ret_val, img = cam.read()
-		img = rotate_image(img, 0)
+		img = rotate_image(img, angle)
 
-		img = img[:,0:(squaresize+2)*11] 
+		#img = img[:,x_offset :(squaresize+2)*11 + x_offset + 20] 
 		
 		if mirror: 
 			img = cv2.flip(img, 1)
@@ -31,12 +35,12 @@ def take_picture(mirror=False):
 		output = img.copy()
 
 
-		img = cv2.medianBlur(img,9)
+		img = cv2.medianBlur(img,5)
 		
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 		cv2.imshow('img', img)
 		
-		circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, param1=20, param2=25, minRadius=15, maxRadius=(squaresize+6)/2)
+		circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, param1=50, param2=20, minRadius=15, maxRadius=(squaresize+6)/2)
 		
 		text = "Circles: 0"
 		
@@ -58,7 +62,7 @@ def take_picture(mirror=False):
 					# corresponding to the center of the circle
 					cv2.circle(output, (x, y), r, (0, 255, 0), 4)	
 					cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
-					for x in range(15):
+					for x in range(1):
 					  for letter in ('ABCDEFGHIJ'):
 					    for num in range(10):
 					      for i in range(len(circles)):					
@@ -69,13 +73,16 @@ def take_picture(mirror=False):
 							    #print(circles[i])
 							    c = output[circles[i,0],circles[i,1]]
 							    #print " --- color ---"
-							    print(c)
-							    if (c[0]>50):
-							    	print "Red"
-							    	grid[ord(letter)-65][num].piece = 'O'
-							    else:
-							    	print "White"
+							    #print(c)
+							    if (sum(c)<45):
+							    	print "Red: %s %d" % (letter, num+1)
+      								#print output[grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y]
 							    	grid[ord(letter)-65][num].piece = 'X'
+							    else:
+							    	print "White: %s %d" % (letter, num+1)
+      								#print output[grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y]
+							    	grid[ord(letter)-65][num].piece = 'O'
+							    print c
 					  
 		font = cv2.FONT_HERSHEY_SIMPLEX	
 		cv2.putText(img, text, (100,100), font, 2, 255)
@@ -120,8 +127,8 @@ def take_picture(mirror=False):
 			break  # esc to quit
 		
 		
-		cv2.destroyAllWindows()
-		return board
+		# cv2.destroyAllWindows()
+		# return board
   cv2.destroyAllWindows()
   
 def rotate_image(img, angle):
@@ -138,9 +145,13 @@ def drawgrid(grid,image):
     for num in range(10):
       pt1 = (grid[ord(letter)-65][num].x - squaresize/2, grid[ord(letter)-65][num].y - squaresize/2)
       pt2 = (grid[ord(letter)-65][num].x + squaresize/2, grid[ord(letter)-65][num].y + squaresize/2)
-      color = (255,255,255)
+      color = (80,80,80)
+      if(grid[ord(letter)-65][num].piece == 'O'):
+      	color = (255,255,255)
+      	
       if(grid[ord(letter)-65][num].piece == 'X'):
-	color = (255,0,0)
+      	color = (0,0,255)
+      	
       myRectangle(image,pt1,pt2,color)
   
 

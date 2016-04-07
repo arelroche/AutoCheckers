@@ -27,7 +27,7 @@ def moveparse(action):
 		if current_action.type == "CAPTURE":
 			moves.append(("pick", chr(current_action.source[1]+65), current_action.source[0]))
 			moves.append(("place", chr(current_action.destination[1]+65), current_action.destination[0]))
-			remove = [chr((current_action.source[1]+current_action.destination[1])/2 + 65), (current_action.source[0] + current_action.destination[0])/2]
+			remove = [chr((current_action.source[1]+current_action.destination[1])/2 + 65), (current_action.source[0]  + current_action.destination[0])/2]
 			moves.append(("pick", remove[0], remove[1]))
 			moves.append(("discard", 0, 0))
 

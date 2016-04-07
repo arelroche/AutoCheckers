@@ -4,7 +4,7 @@ from convert_gcode import convert_gcode as move
 import main
 
 def ser_init():
-	ser=serial.Serial(port='\\.\COM5', baudrate=250000, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=1)
+	ser=serial.Serial(port='\\.\COM7', baudrate=250000, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=1)
 	print(ser.name)
 	return ser
 
@@ -28,7 +28,7 @@ def ser_arduino(ser):
 			print "performing a %s at %s%s" % (command, col, row)
 			moveArray = []
 			moveArray.append((command, col, row))
-			move(moveArray, ser)
+			move(ser, moveArray)
 		elif (command == "auto"):
 			main.computer_play(ser)
 		else:
@@ -53,11 +53,17 @@ def ser_command(ser, command):
 
 def home(ser):
 	ser_command(ser,'G28 X0 Y0') #home
+	moveArray = []
+	col = "A"
+	row = 11
+	moveArray.append(("place", col, row))
+	move(ser, moveArray)
 
 def off(ser):
-	ser_command(ser,'M18') #home
+	ser_command(ser,'M18') #off
+	ser_command(ser,'M107')
 
 def on(ser):
-	ser_command(ser,'M17') #home
+	ser_command(ser,'M17') #on
 
 	
