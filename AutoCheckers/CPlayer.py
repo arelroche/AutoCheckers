@@ -26,9 +26,9 @@ class CPlayer(object) :
     def handoff(self):
               
         
-        reply = ''
-        while reply != 'y':
-            reply = raw_input("Have you completed your turn? (y/n): ")          
+        # reply = ''
+        # while reply != 'y':
+        #     reply = raw_input("Have you completed your turn? (y/n): ")          
         self.board_from_vision()
         
         

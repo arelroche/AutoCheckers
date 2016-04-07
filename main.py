@@ -44,7 +44,7 @@ def computer_play(ser):
 
 		print moves
 		
-		move(ser,moves)
+		#move(ser,moves)
 
 		print "Your turn."
 
