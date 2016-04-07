@@ -16,6 +16,12 @@ def ser_arduino(ser):
 		if(command == 'home'):
 			print "homing..."
 			home(ser)
+		elif(command == 'off'):
+			print "turning motors off"
+			off(ser)
+		elif(command == 'on'):
+			print "turning motors on"
+			on(ser)
 		elif(command == 'pick' or command == 'place'):
 			col = raw_input("Enter column: ")
 			row = raw_input("Enter row: ")
@@ -33,7 +39,7 @@ def ser_arduino(ser):
 
 def ser_command(ser, command):
 	ser.write(command + "\n")
-	print ser.read(200)
+	print ser.read(100)
 
 
 
@@ -47,5 +53,11 @@ def ser_command(ser, command):
 
 def home(ser):
 	ser_command(ser,'G28 X0 Y0') #home
+
+def off(ser):
+	ser_command(ser,'M18') #home
+
+def on(ser):
+	ser_command(ser,'M17') #home
 
 	

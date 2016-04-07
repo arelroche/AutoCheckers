@@ -9,8 +9,8 @@ from convert_gcode import convert_gcode as move
 import testCheckers as ai
 
 def main():
-	#ser = comm.ser_init()
-	ser = None
+	ser = comm.ser_init()
+	#ser = None
 
 	while True:
 		state = raw_input('"manual" or "auto"? :')
@@ -27,7 +27,7 @@ def computer_play(ser):
 	
 	while True:
 
-		#board =  cam.take_picture(mirror=False)
+		board =  cam.take_picture(mirror=False)
 
 		#### code for new board goes here ####
 		#moveArray = robotexec(board)
