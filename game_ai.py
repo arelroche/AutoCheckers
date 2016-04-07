@@ -19,6 +19,9 @@ def next_move(board):
 def moveparse(action):
 	moves =[]
 	current_action = action 
+	current_action.source = (10 - current_action.source[0], 10 - current_action.source[1])
+	current_action.destination = (10 - current_action.destination[0], 10 - current_action.destination[1])
+	
 	while current_action != None:
 		if current_action.type == "MOVE":
 			moves.append(("pick", chr(current_action.source[1]+65), current_action.source[0]))
@@ -32,7 +35,7 @@ def moveparse(action):
 			moves.append(("discard", 0, 0))
 
 		current_action = current_action.next
-
+	print moves
 	return moves	
 
 

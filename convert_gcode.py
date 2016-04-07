@@ -52,7 +52,7 @@ def convert_gcode(ser, moveArray):
             #fan off
             comm.ser_command(ser, 'M107')
             # comm.ser_command(ser, 'G1 Z-10')
-            # sleep(2)
+            sleep(2)
             # comm.ser_command(ser, 'G1 Z10')
         
         #z-up

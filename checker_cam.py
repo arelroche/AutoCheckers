@@ -40,7 +40,7 @@ def take_picture(mirror=False):
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 		cv2.imshow('img', img)
 		
-		circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, param1=50, param2=20, minRadius=15, maxRadius=(squaresize+6)/2)
+		circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, param1=100, param2=20, minRadius=15, maxRadius=(squaresize+6)/2)
 		
 		text = "Circles: 0"
 		
@@ -60,8 +60,8 @@ def take_picture(mirror=False):
 			for (x, y, r) in circles:
 					# draw the circle in the output image, then draw a rectangle
 					# corresponding to the center of the circle
-					cv2.circle(output, (x, y), r, (0, 255, 0), 4)	
-					cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
+					#cv2.circle(output, (x, y), r, (0, 255, 0), 4)	
+					#cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
 					for x in range(1):
 					  for letter in ('ABCDEFGHIJ'):
 					    for num in range(10):
@@ -71,10 +71,11 @@ def take_picture(mirror=False):
 							    #grid[ord(letter)-65][num].piece = 'X'
 							    #print(grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y)
 							    #print(circles[i])
-							    c = output[circles[i,0],circles[i,1]]
+							    c = output[circles[i,1],circles[i,0]]
+							    #output[circles[i,1],circles[i,0]] = (255,0,0)
 							    #print " --- color ---"
 							    #print(c)
-							    if (sum(c)<45):
+							    if (sum(c)<450):
 							    	print "Red: %s %d" % (letter, num+1)
       								#print output[grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y]
 							    	grid[ord(letter)-65][num].piece = 'X'
@@ -83,6 +84,8 @@ def take_picture(mirror=False):
       								#print output[grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y]
 							    	grid[ord(letter)-65][num].piece = 'O'
 							    print c
+							  
+					break
 					  
 		font = cv2.FONT_HERSHEY_SIMPLEX	
 		cv2.putText(img, text, (100,100), font, 2, 255)
@@ -127,8 +130,8 @@ def take_picture(mirror=False):
 			break  # esc to quit
 		
 		
-		# cv2.destroyAllWindows()
-		# return board
+		cv2.destroyAllWindows()
+		return board
   cv2.destroyAllWindows()
   
 def rotate_image(img, angle):
