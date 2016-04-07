@@ -9,8 +9,8 @@ from convert_gcode import convert_gcode as move
 import testCheckers as ai
 
 def main():
-	ser = comm.ser_init()
-	#ser = None
+	#ser = comm.ser_init()
+	ser = None
 
 	while True:
 		state = raw_input('"manual" or "auto"? :')

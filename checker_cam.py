@@ -64,12 +64,18 @@ def take_picture(mirror=False):
 					      for i in range(len(circles)):					
 							if(grid[ord(letter)-65][num].x  - squaresize/2 <= circles[i,0] <= grid[ord(letter)-65][num].x + squaresize/2):
 							  if(grid[ord(letter)-65][num].y  - squaresize/2 <= circles[i,1] <= grid[ord(letter)-65][num].y + squaresize/2):
-							    grid[ord(letter)-65][num].piece = 'X'
+							    #grid[ord(letter)-65][num].piece = 'X'
 							    #print(grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y)
 							    #print(circles[i])
 							    c = output[circles[i,0],circles[i,1]]
 							    #print " --- color ---"
-							    #print(c)
+							    print(c)
+							    if (c[0]>50):
+							    	print "Red"
+							    	grid[ord(letter)-65][num].piece = 'O'
+							    else:
+							    	print "White"
+							    	grid[ord(letter)-65][num].piece = 'X'
 					  
 		font = cv2.FONT_HERSHEY_SIMPLEX	
 		cv2.putText(img, text, (100,100), font, 2, 255)
@@ -114,8 +120,8 @@ def take_picture(mirror=False):
 			break  # esc to quit
 		
 		
-		# cv2.destroyAllWindows()
-		# return board
+		cv2.destroyAllWindows()
+		return board
   cv2.destroyAllWindows()
   
 def rotate_image(img, angle):
