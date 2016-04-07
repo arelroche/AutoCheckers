@@ -4,16 +4,15 @@ from enum import Enum
 from time import sleep
 
   
-squaresize = 38
+squaresize = 41
 
 class square:
   
   def __init__(self,letter,number):
-    #self.__cordinate(letter, number)
     self.size = squaresize
     self.piece = '.'
-    self.x = (ord(letter)-64)*40
-    self.y = (number+1)*40    
+    self.x = (ord(letter)-64)*(squaresize+2) 
+    self.y = (number+1)*(squaresize+2)      
         
 
 
@@ -22,17 +21,22 @@ def take_picture(mirror=False):
   cam = cv2.VideoCapture(0)
   while True:
 		ret_val, img = cam.read()
+		img = rotate_image(img, 0)
+
+		img = img[:,0:(squaresize+2)*11] 
 		
 		if mirror: 
 			img = cv2.flip(img, 1)
 		
 		output = img.copy()
-		
-		img = cv2.medianBlur(img,5)
+
+
+		img = cv2.medianBlur(img,9)
 		
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+		cv2.imshow('img', img)
 		
-		circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, param1=75, param2=65, minRadius=0, maxRadius=0)
+		circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, param1=20, param2=25, minRadius=15, maxRadius=(squaresize+6)/2)
 		
 		text = "Circles: 0"
 		
@@ -58,14 +62,15 @@ def take_picture(mirror=False):
 					  for letter in ('ABCDEFGHIJ'):
 					    for num in range(10):
 					      for i in range(len(circles)):					
-						if(grid[ord(letter)-65][num].x  - squaresize/2 <= circles[i,0] <= grid[ord(letter)-65][num].x + squaresize/2):
-						  if(grid[ord(letter)-65][num].y  - squaresize/2 <= circles[i,1] <= grid[ord(letter)-65][num].y + squaresize/2):
-						    grid[ord(letter)-65][num].piece = 'x'
-						    #print(grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y)
-						    #print(circles[i])
-						    c = output[circles[i,0],circles[i,1]]
-						    #print(c)
-				  
+							if(grid[ord(letter)-65][num].x  - squaresize/2 <= circles[i,0] <= grid[ord(letter)-65][num].x + squaresize/2):
+							  if(grid[ord(letter)-65][num].y  - squaresize/2 <= circles[i,1] <= grid[ord(letter)-65][num].y + squaresize/2):
+							    grid[ord(letter)-65][num].piece = 'x'
+							    #print(grid[ord(letter)-65][num].x, grid[ord(letter)-65][num].y)
+							    #print(circles[i])
+							    c = output[circles[i,0],circles[i,1]]
+							    print " --- color ---"
+							    print(c)
+					  
 		font = cv2.FONT_HERSHEY_SIMPLEX	
 		cv2.putText(img, text, (100,100), font, 2, 255)
 		cv2.putText(output, text, (100,100), font, 2, 255)
@@ -113,6 +118,14 @@ def take_picture(mirror=False):
 		return board
   cv2.destroyAllWindows()
   
+def rotate_image(img, angle):
+	if angle == 0:
+		return img
+	image_center = tuple(np.array(img.shape)/2)
+	rot_mat = cv2.getRotationMatrix2D((image_center[0], image_center[1]),angle, 1.0)
+	result = cv2.warpAffine(img, rot_mat, (img.shape[0], img.shape[1]),flags=cv2.INTER_LINEAR)
+	return result
+
 def drawgrid(grid,image):
   
   for letter in ('ABCDEFGHIJ'):

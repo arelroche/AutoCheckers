@@ -24,6 +24,8 @@ DBoard module contains DBoard class and related stuff.
 import os
 
 from CPiece import CPiece
+import numpy as np
+
 
 __author__ = "Davide Aversa"
 __copyright__ = "Copyright 2011"
@@ -33,6 +35,9 @@ __version__ = "1.0"
 __maintainer__ = "Davide Aversa"
 __email__ = "thek3nger@gmail.com"
 __status__ = "Production"
+
+
+
 
 class CBoard(object):
     '''
@@ -54,34 +59,78 @@ class CBoard(object):
         self.dark_cached = False
         
         # Add 20 Dark Piece in starting position.
-        row = 0
-        column = 1
-        delta = 1
-        for _ in range(20) :
-            new_piece = CPiece(self, row, column, 'DARK')
-            self.dark_pieces.append(new_piece)
-            self.set_bitmap(row, column, new_piece)
-            column += 2 
-            if column > 9 :
-                column -= (10 + delta)
-                row += 1
-                delta = -delta
+        self.board_from_vision()
+
+        # row = 0
+        # column = 1
+        # delta = 1
+        # for _ in range(20) :
+        #     new_piece = CPiece(self, row, column, 'DARK')
+        #     self.dark_pieces.append(new_piece)
+        #     self.set_bitmap(row, column, new_piece)
+        #     column += 2 
+        #     if column > 9 :
+        #         column -= (10 + delta)
+        #         row += 1
+        #         delta = -delta
         
-        # Add 20 Light Piece in starting position.
-        row = 6
-        column = 1
-        delta = 1
-        for _ in range(20) :
-            new_piece = CPiece(self, row, column, 'LIGHT')
-            self.light_pieces.append(new_piece)
-            self.set_bitmap(row, column, new_piece)
-            column += 2 
-            if column > 9 :
-                column -= (10 + delta)
-                row += 1
-                delta = -delta
+        # # Add 20 Light Piece in starting position.
+        # row = 6
+        # column = 1
+        # delta = 1
+        # for _ in range(20) :
+        #     new_piece = CPiece(self, row, column, 'LIGHT')
+        #     self.light_pieces.append(new_piece)
+        #     self.set_bitmap(row, column, new_piece)
+        #     column += 2 
+        #     if column > 9 :
+        #         column -= (10 + delta)
+        #         row += 1
+        #         delta = -delta
                 
         print(self)
+
+    def board_from_vision(self):
+        
+        board_temp = np.genfromtxt('board.txt', dtype=str)
+        #print(board_temp)
+        del self.light_pieces[:]
+        del self.dark_pieces[:]
+        
+        for t_row in range(10):
+            for t_col in range(10):              
+                
+                if ((t_row % 2 == 0) != (t_col % 2 == 0)) :
+                    if board_temp[t_row][t_col] == 'X':
+                        new_piece = CPiece(self, t_row, t_col,'DARK')
+                        self.dark_pieces.append(new_piece)
+                        self.set_bitmap(t_row, t_col, new_piece)
+                    
+                    elif board_temp[t_row][t_col] == '#':
+                        new_piece = CPiece(self, t_row, t_col,'DARK')
+                        new_piece.promote()                    
+                        self.dark_pieces.append(new_piece)
+                        self.set_bitmap(t_row, t_col, new_piece) 
+                        
+                    elif board_temp[t_row][t_col] == 'O':
+                        new_piece = CPiece(self, t_row, t_col,'LIGHT')
+                        self.light_pieces.append(new_piece) 
+                        self.set_bitmap(t_row, t_col, new_piece)
+                     
+                    elif board_temp[t_row][t_col] == '$':
+                        new_piece = CPiece(self, t_row, t_col,'LIGHT')
+                        new_piece.promote()                    
+                        self.light_pieces.append(new_piece)
+                        self.set_bitmap(t_row, t_col, new_piece) 
+                        
+                    elif board_temp[t_row][t_col] == '.':
+                            self.set_bitmap(t_row, t_col, None)
+                    
+                    else :
+                        print "Invalid Input!"
+                        
+                else:
+                    pass
                 
     def __cord2idx(self, row, column):
         '''

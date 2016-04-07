@@ -65,8 +65,11 @@ class CheckersBrain(object):
         
         self.move = 0
         self.board = CBoard()
+        #self.board = CPlayer.board_from_vision()
         self.human = CPlayer(self.board)
         self.turn = 'LIGHT'
+        
+        
         
         self.gameover = False
         self.winner = None
@@ -77,7 +80,9 @@ class CheckersBrain(object):
         if weights_bis == None :
             self.weights_bis = self.weights
         else :
-            self.weights_bis = weights_bis            
+            self.weights_bis = weights_bis    
+
+
     
     def reset(self):
         '''
@@ -103,7 +108,7 @@ class CheckersBrain(object):
             '''
             self.human.handoff()
             
-            self.move += 1
+            #self.move += 1
             if len(self.board.light_pieces) == 0 :
                 self.gameover = True
                 self.winner = 'DARK'
@@ -135,6 +140,7 @@ class CheckersBrain(object):
         '''
         Execute "selfish" AI vs. AI match.
         '''
+           
         self.gameover = False
         while not self.gameover and self.nocapturecounter < 50 :
             if (self.turn == 'LIGHT'):
@@ -143,11 +149,14 @@ class CheckersBrain(object):
                     self.winner = self._switch_player(self.turn) # No valid move!
                     break
                 self.apply_action(bestmove)
+               
             else:
                 self.switch_turn()
             #if self.verbose : 
             #    print(self.board)
             #    print(self.board.board_score(self.weights))
+            return bestmove
+
         if not self.gameover : # So, too-much noncapture.
             self.winner = 'DRAW'
         return self.winner
@@ -162,6 +171,7 @@ class CheckersBrain(object):
         self.board.apply_action(action)
         print "Action Applied"
         print(self.board)
+
         #
         # Add robot piece moving code here
         #        
@@ -178,7 +188,8 @@ class CheckersBrain(object):
                 if action.type != 'CAPTURE' :
                     self.nocapturecounter += 1
                 else :
-                    self.nocapturecounter = 0        
+                    self.nocapturecounter = 0  
+             
                 
     ########
     ## AI ##
@@ -242,8 +253,11 @@ class CheckersBrain(object):
         
         RETURN    
         '''
+        #print "player is: %s | level is: %d" % (player, level)
+        #print self.move
         if level == 0 :
             value = self.board.board_score(weights)
+            #print "value: %f" % value
             self.path.append((self.board.movelist[self.move], value))
             return value
         if player == 'LIGHT' :
@@ -280,10 +294,10 @@ class CheckersBrain(object):
         
     def robot_execution(action):
         ''' Do shit with the robotico '''
-        
         current_action = action
         while current_action != None:
-            
+
+
             if current_action.type == 'MOVE':
                 pass
                 
@@ -293,8 +307,7 @@ class CheckersBrain(object):
                 pass
                 
         
-        
-        
+                    
         
             current_action = current_action.next
             

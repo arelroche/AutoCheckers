@@ -35,7 +35,7 @@ class CPlayer(object) :
     def board_from_vision(self):
         
         board_temp = np.genfromtxt('board.txt', dtype=str)
-        print(board_temp)
+        #print(board_temp)
         del self.board.light_pieces[:]
         del self.board.dark_pieces[:]
         
@@ -75,9 +75,9 @@ class CPlayer(object) :
                     pass
                 
                         
-        self.print_lists()
-        print "Board in Memory"
-        self.print_board_values()
+        #self.print_lists()
+        #print "Board in Memory"
+        #self.print_board_values()
                     
                             
     def print_lists(self):
